@@ -1,3 +1,9 @@
+php-imagick (3.4.0~rc6-1~dotdeb+8.1) stable; urgency=medium
+
+  * Imported Upstream version 3.4.0~rc6
+
+ -- Guillaume Plessis <gui@dotdeb.org>  Sat, 30 Jan 2016 23:33:34 +0000
+
 php-imagick (3.4.0~rc5-1~dotdeb+8.1) stable; urgency=medium
 
   * Imported Upstream version 3.4.0~rc5
