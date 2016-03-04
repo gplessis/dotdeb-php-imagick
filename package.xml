@@ -23,25 +23,19 @@ This extension requires ImageMagick version 6.5.3-10+ and PHP 5.4.0+.</descripti
   <email>scottmac@php.net</email>
   <active>no</active>
  </lead>
- <date>2016-01-30</date>
- <time>01:28:17</time>
+ <date>2016-03-04</date>
+ <time>15:28:56</time>
  <version>
-  <release>3.4.0RC6</release>
+  <release>3.4.0</release>
   <api>3.4.0</api>
  </version>
  <stability>
-  <release>beta</release>
+  <release>stable</release>
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
  <notes>
-- Added:
-  * Imagick::evaluateImages(int EVALUATE_CONSTANT) : Imagick
-- Fixes:
-  * Imagick::setImageWhitePoint, Imagick::setImageRedPrimary, Imagick::setImageGreenPrimary,
-  Imagick::setImageBluePrimary now take 3 params when compiled against IM7.
-  * Imagick::getImageWhitePoint, Imagick::getImageRedPrimary, Imagick::getImageGreenPrimary,
-   Imagick::getImageBluePrimary now return 3 values when compiled against IM7.
+No changes from 3.4.0RC6.
  </notes>
  <contents>
   <dir name="/">
@@ -317,7 +311,7 @@ This extension requires ImageMagick version 6.5.3-10+ and PHP 5.4.0+.</descripti
    <file md5sum="4c385e40b3f2947883e71bb10a5dc5e9" name="imagickkernel_class.c" role="src" />
    <file md5sum="1ecb01cdaea782ecb2403a30865ece00" name="imagick_helpers.c" role="src" />
    <file md5sum="66bc408b3e6cc745ef877eb4909d38aa" name="imagick_file.c" role="src" />
-   <file md5sum="7236c8299e7942abdfbb38ff82c8f1ea" name="php_imagick.h" role="src">
+   <file md5sum="f22b03498722b54d737b9c0543f26164" name="php_imagick.h" role="src">
     <tasks:replace from="@PACKAGE_VERSION@" to="version" type="package-info" />
    </file>
    <file md5sum="6acdf8376c89c03033f5219f2a8e4d82" name="php_imagick_defs.h" role="src" />
@@ -327,7 +321,7 @@ This extension requires ImageMagick version 6.5.3-10+ and PHP 5.4.0+.</descripti
    <file md5sum="b407a134c7b9a5e3737e26a1f211347d" name="php_imagick_file.h" role="src" />
    <file md5sum="28792d4b9e3124aaa6c11a941cd5a959" name="shim_im6_to_im7.c" role="src" />
    <file md5sum="361f3367c0a43e7bf9e27d3ffe292771" name="shim_im6_to_im7.h" role="src" />
-   <file md5sum="f13aad92605f6d65b5ff26ff7f7e95f9" name="ChangeLog" role="doc" />
+   <file md5sum="e0d2ffb643833836ca4068c39aee2ed8" name="ChangeLog" role="doc" />
    <file md5sum="dd34a70236f008af999de817b93a5e3a" name="LICENSE" role="doc" />
   </dir>
  </contents>
