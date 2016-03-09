@@ -293,6 +293,7 @@ double *php_imagick_zval_to_double_array(zval *param_array, im_long *num_element
 
 #ifdef ZEND_ENGINE_3
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(param_array), pzvalue) {
+		ZVAL_DEREF(pzvalue);
 		double_array[i] = zval_get_double(pzvalue);
 		i++;
 	} ZEND_HASH_FOREACH_END();
@@ -343,6 +344,7 @@ long *php_imagick_zval_to_long_array(zval *param_array, long *num_elements TSRML
 
 #ifdef ZEND_ENGINE_3
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(param_array), pzvalue) {
+		ZVAL_DEREF(pzvalue);
 		long_array[i] = zval_get_long(pzvalue);
 		i++;
 	} ZEND_HASH_FOREACH_END();
@@ -394,6 +396,7 @@ unsigned char *php_imagick_zval_to_char_array(zval *param_array, long *num_eleme
 
 #ifdef ZEND_ENGINE_3
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(param_array), pzvalue) {
+		ZVAL_DEREF(pzvalue);
 		char_array[i] = zval_get_long(pzvalue);
 		i++;
 	} ZEND_HASH_FOREACH_END();
@@ -550,6 +553,7 @@ PointInfo *php_imagick_zval_to_pointinfo_array(zval *coordinate_array, int *num_
 #ifdef ZEND_ENGINE_3
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(coordinate_array), pzvalue) {
 		zval *pz_x, *pz_y;
+		ZVAL_DEREF(pzvalue);
 
 		/* If its something than array lets error here */
 		if(Z_TYPE_P(pzvalue) != IS_ARRAY) {
@@ -758,6 +762,9 @@ PixelWand *php_imagick_zval_to_pixelwand (zval *param, php_imagick_class_type_t 
 	PixelWand *pixel_wand = NULL;
 	*allocated = 0;
 
+#ifdef ZEND_ENGINE_3
+	ZVAL_DEREF(param);
+#endif 
 	if (Z_TYPE_P (param) == IS_LONG || Z_TYPE_P (param) == IS_DOUBLE) {
 		zval var;
 		var = *param;
@@ -803,6 +810,9 @@ PixelWand *php_imagick_zval_to_opacity (zval *param, php_imagick_class_type_t ca
 	PixelWand *pixel_wand = NULL;
 	*allocated = 0;
 
+#ifdef ZEND_ENGINE_3
+	ZVAL_DEREF(param);
+#endif
 	if (Z_TYPE_P (param) == IS_STRING) {
 		zval var;
 		var = *param;
@@ -1643,6 +1653,9 @@ void php_imagick_initialize_constants(TSRMLS_D)
 #if MagickLibVersion >= 0x687
 	IMAGICK_REGISTER_CONST_LONG("SPARSECOLORMETHOD_INVERSE", InverseColorInterpolate);
 #endif
+#if MagickLibVersion >= 0x693
+	IMAGICK_REGISTER_CONST_LONG("SPARSECOLORMETHOD_MANHATTAN", ManhattanColorInterpolate);
+#endif
 	IMAGICK_REGISTER_CONST_LONG("DITHERMETHOD_UNDEFINED", UndefinedDitherMethod);
 	IMAGICK_REGISTER_CONST_LONG("DITHERMETHOD_NO", NoDitherMethod);
 	IMAGICK_REGISTER_CONST_LONG("DITHERMETHOD_RIEMERSMA", RiemersmaDitherMethod);
@@ -1755,6 +1768,9 @@ IMAGICK_REGISTER_CONST_LONG("KERNEL_EUCLIDEAN", EuclideanKernel);
 IMAGICK_REGISTER_CONST_LONG("KERNEL_USER_DEFINED", UserDefinedKernel);
 IMAGICK_REGISTER_CONST_LONG("KERNEL_BINOMIAL", BinomialKernel);
 
+/* Draw directions */
+IMAGICK_REGISTER_CONST_LONG("DIRECTION_LEFT_TO_RIGHT", LeftToRightDirection);
+IMAGICK_REGISTER_CONST_LONG("DIRECTION_RIGHT_TO_LEFT", RightToLeftDirection);
 
 // The kernel is scaled directly using given scaling factor without change.
 IMAGICK_REGISTER_CONST_LONG("NORMALIZE_KERNEL_NONE", 0);
