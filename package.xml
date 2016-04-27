@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.10.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>imagick</name>
  <channel>pecl.php.net</channel>
  <summary>Provides a wrapper to the ImageMagick library.</summary>
@@ -23,39 +23,21 @@ This extension requires ImageMagick version 6.5.3-10+ and PHP 5.4.0+.</descripti
   <email>scottmac@php.net</email>
   <active>no</active>
  </lead>
- <date>2016-03-09</date>
- <time>17:21:38</time>
+ <date>2016-04-24</date>
+ <time>22:51:17</time>
  <version>
-  <release>3.4.1</release>
-  <api>3.4.1</api>
+  <release>3.4.2</release>
+  <api>3.4.2</api>
  </version>
  <stability>
-  <release>stable</release>
-  <api>stable</api>
+  <release>beta</release>
+  <api>beta</api>
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
  <notes>
 - Fixes:
-  * Bug 71742 - arrays that contain data that is held by reference gives error.
-- Added:
-  * Imagick::autoGammaImage([int channel = CHANNEL_ALL])
-  * Imagick::autoOrient()
-  * Imagick::compositeImageGravity(Imagick $image, int COMPOSITE_CONSTANT, int GRAVITY_CONSTANT)
-  * Imagick::localContrastImage(float radius, float strength)
-  * Imagick::DIRECTION_LEFT_TO_RIGHT
-  * Imagick::DIRECTION_RIGHT_TO_LEFT
-  * Imagick::SPARSECOLORMETHOD_MANHATTAN
-  * ImagickDraw::getOpacity() : float
-  * ImagickDraw::setOpacity(float opacity) :bool 
-  * ImagickDraw::getFontResolution() : array
-  * ImagickDraw::setFontResolution(float x, float y) : bool
-  * ImagickDraw::getTextDirection() : bool
-  * ImagickDraw::setTextDirection(int direction) : bool
-  * ImagickDraw::getBorderColor() : ImagickPixel
-  * ImagickDraw::setBorderColor(ImagickPixel color) : bool
-  * ImagickDraw::getDensity() : string|null
-  * ImagickDraw::setDensity(string density_string) : bool
-  * ImagickPixel::setColorFromPixel(ImagickPixel $srcPixel) : bool
+  * Bug: IM143 Correct ifdef around setOpacity and localContrastImage.
+  * Bug: IM147 Imagick was Borging PHP&apos;s error handler.
  </notes>
  <contents>
   <dir name="/">
@@ -324,25 +306,25 @@ This extension requires ImageMagick version 6.5.3-10+ and PHP 5.4.0+.</descripti
    <file md5sum="29d73c7d4993122ca81e6127e5edb133" name="imagemagick.m4" role="src" />
    <file md5sum="432af3c0083b18708c1516d4db08863b" name="config.w32" role="src" />
    <file md5sum="6077035e65e0b0bbe5a28917282e26b2" name="CREDITS" role="doc" />
-   <file md5sum="21c1a27b1ac22149b54133ca8a0732e3" name="imagick.c" role="src" />
-   <file md5sum="45c8e7e727fa8e4525e248519c963e5b" name="imagick_class.c" role="src" />
-   <file md5sum="7c0081f8b999e6baca263fa5c423e04c" name="imagickdraw_class.c" role="src" />
+   <file md5sum="c991f97d940ca86970e78c9173de7982" name="imagick.c" role="src" />
+   <file md5sum="cc3d0afd0ac6738721669faf8f0bc699" name="imagick_class.c" role="src" />
+   <file md5sum="89ece6cdbd422c5ebd55b026139175be" name="imagickdraw_class.c" role="src" />
    <file md5sum="ef48a059b459253e492d53efd4dea098" name="imagickpixel_class.c" role="src" />
    <file md5sum="1f3706e73d4eed8486212df31759ecdd" name="imagickpixeliterator_class.c" role="src" />
    <file md5sum="be5657993d27adbec45203be1b8eb635" name="imagickkernel_class.c" role="src" />
    <file md5sum="2bc55e31ced994afffe09dd7a9f0bbba" name="imagick_helpers.c" role="src" />
-   <file md5sum="66bc408b3e6cc745ef877eb4909d38aa" name="imagick_file.c" role="src" />
-   <file md5sum="6b6d8a01b0bd93a4dd9375e6034efd7b" name="php_imagick.h" role="src">
+   <file md5sum="d6ede3b576d4b618b293be0e9ecb70a2" name="imagick_file.c" role="src" />
+   <file md5sum="b2863d800c7d27be149ff34af36e69d7" name="php_imagick.h" role="src">
     <tasks:replace from="@PACKAGE_VERSION@" to="version" type="package-info" />
    </file>
-   <file md5sum="ebfb62f232a595cfc6799dd49b1f8f16" name="php_imagick_defs.h" role="src" />
+   <file md5sum="e3f4a9e1a2d84e311087c8c007d5d341" name="php_imagick_defs.h" role="src" />
    <file md5sum="043acb065f6104a908223b18a7a289b1" name="php_imagick_helpers.h" role="src" />
    <file md5sum="1cda4ab0d10299d239db2c0e198b4084" name="php_imagick_macros.h" role="src" />
    <file md5sum="9b4b96d6a870d2962576dd72ec953989" name="php_imagick_shared.h" role="src" />
    <file md5sum="b407a134c7b9a5e3737e26a1f211347d" name="php_imagick_file.h" role="src" />
    <file md5sum="28792d4b9e3124aaa6c11a941cd5a959" name="shim_im6_to_im7.c" role="src" />
    <file md5sum="361f3367c0a43e7bf9e27d3ffe292771" name="shim_im6_to_im7.h" role="src" />
-   <file md5sum="7e6bd78f4a46f3be987bcd5ab61f3499" name="ChangeLog" role="doc" />
+   <file md5sum="6adc5b649551c96819aaba30ddbe6bf6" name="ChangeLog" role="doc" />
    <file md5sum="dd34a70236f008af999de817b93a5e3a" name="LICENSE" role="doc" />
   </dir>
  </contents>
