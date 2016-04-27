@@ -1459,10 +1459,12 @@ PHP_IMAGICK_API zend_class_entry *php_imagickpixel_get_class_entry()
 		ZEND_ARG_INFO(0, GRAVITY)
 	ZEND_END_ARG_INFO()
 
+#if MagickLibVersion >= 0x693
 	ZEND_BEGIN_ARG_INFO_EX(imagick_localContrastImage_args, 0, 0, 2)
 		ZEND_ARG_INFO(0, radius)
 		ZEND_ARG_INFO(0, strength)
 	ZEND_END_ARG_INFO()
+#endif // MagickLibVersion >= 0x693
 
 /* ImagickDraw */
 #if MagickLibVersion > 0x649
@@ -1868,9 +1870,11 @@ PHP_IMAGICK_API zend_class_entry *php_imagickpixel_get_class_entry()
 		ZEND_ARG_INFO(0, dashArray)
 	ZEND_END_ARG_INFO()
 
+#if MagickLibVersion >= 0x693
 	ZEND_BEGIN_ARG_INFO_EX(imagickdraw_setopacity_args, 0, 0, 1)
 		ZEND_ARG_INFO(0, opacity)
 	ZEND_END_ARG_INFO()
+#endif // MagickLibVersion >= 0x693
 
 	ZEND_BEGIN_ARG_INFO_EX(imagickdraw_setfontresolution_args, 0, 0, 2)
 		ZEND_ARG_INFO(0, x)
@@ -2130,8 +2134,10 @@ static zend_function_entry php_imagickdraw_class_methods[] =
 	PHP_ME(imagickdraw, pop, imagickdraw_zero_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagickdraw, push, imagickdraw_zero_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagickdraw, setstrokedasharray, imagickdraw_setstrokedasharray_args, ZEND_ACC_PUBLIC)
+#if MagickLibVersion >= 0x693
 	PHP_ME(imagickdraw, getopacity, imagickdraw_zero_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagickdraw, setopacity, imagickdraw_setopacity_args, ZEND_ACC_PUBLIC)
+#endif //MagickLibVersion >= 0x693
 #if MagickLibVersion >= 0x675
 	PHP_ME(imagickdraw, getfontresolution, imagickdraw_zero_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagickdraw, setfontresolution, imagickdraw_setfontresolution_args, ZEND_ACC_PUBLIC)
@@ -2746,7 +2752,7 @@ static zend_function_entry php_imagick_class_methods[] =
 	PHP_ME(imagick, autoorient, imagick_zero_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, compositeimagegravity, imagick_compositeimagegravity_args, ZEND_ACC_PUBLIC)
 #endif // #if MagickLibVersion >= 0x692
-#if MagickLibVersion >= 0x692
+#if MagickLibVersion >= 0x693
 	PHP_ME(imagick, localcontrastimage, imagick_localContrastImage_args, ZEND_ACC_PUBLIC)
 #endif // #if MagickLibVersion >= 0x692
 
