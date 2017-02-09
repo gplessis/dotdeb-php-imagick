@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.10.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>imagick</name>
  <channel>pecl.php.net</channel>
  <summary>Provides a wrapper to the ImageMagick library.</summary>
@@ -23,21 +23,19 @@ This extension requires ImageMagick version 6.5.3-10+ and PHP 5.4.0+.</descripti
   <email>scottmac@php.net</email>
   <active>no</active>
  </lead>
- <date>2016-04-24</date>
- <time>22:51:17</time>
+ <date>2017-02-01</date>
+ <time>23:00:33</time>
  <version>
-  <release>3.4.2</release>
-  <api>3.4.2</api>
+  <release>3.4.3</release>
+  <api>3.4.3</api>
  </version>
  <stability>
-  <release>beta</release>
-  <api>beta</api>
+  <release>stable</release>
+  <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
  <notes>
-- Fixes:
-  * Bug: IM143 Correct ifdef around setOpacity and localContrastImage.
-  * Bug: IM147 Imagick was Borging PHP&apos;s error handler.
+No changes from 3.4.3RC4.
  </notes>
  <contents>
   <dir name="/">
@@ -117,7 +115,7 @@ This extension requires ImageMagick version 6.5.3-10+ and PHP 5.4.0+.</descripti
    <file md5sum="a2a878fd9996d4ff0f5ae09510af0e6b" name="tests/070_Imagick_equalizeImage_case2.phpt" role="test" />
    <file md5sum="b179663a420267f21349e6215ea53228" name="tests/071_Imagick_flipImage_basic.phpt" role="test" />
    <file md5sum="64cb6461f45a4c4f538edf42ae72689c" name="tests/072_Imagick_evaluateImage_basic.phpt" role="test" />
-   <file md5sum="6952239470a5fd653ef50df210d3d271" name="tests/073_Imagick_forwardFourierTransformImage_basic.phpt" role="test" />
+   <file md5sum="982caa18d075aeb95a2c6b071e3e2b39" name="tests/073_Imagick_forwardFourierTransformImage_basic.phpt" role="test" />
    <file md5sum="a0c2be35a529c9991f8d523664aab8ba" name="tests/074_Imagick_flopImage_basic.phpt" role="test" />
    <file md5sum="fdd10db0c7b9bef01e524a38d7a47f1b" name="tests/075_Imagick_floodFillPaintImage_basic.phpt" role="test" />
    <file md5sum="b06bcf67e33366a2f2cec6d679cc8374" name="tests/076_Imagick_fxImage_basic.phpt" role="test" />
@@ -129,7 +127,7 @@ This extension requires ImageMagick version 6.5.3-10+ and PHP 5.4.0+.</descripti
    <file md5sum="be41071388b27818049065f10d9a97ba" name="tests/083_Imagick_getPixelIterator_basic.phpt" role="test" />
    <file md5sum="1e9901203c662533e9657637253c02c7" name="tests/084_Imagick_getPixelRegionIterator_basic.phpt" role="test" />
    <file md5sum="48a3b8fd5b5d759ed8331e93c235c2b6" name="tests/085_Imagick_haldClutImage_basic.phpt" role="test" />
-   <file md5sum="7cd9905fa5f9c37d83958516895ee91e" name="tests/086_Imagick_forwardFourierTransformImage_basic.phpt" role="test" />
+   <file md5sum="4142fb0dba6bf807369c339834bacef1" name="tests/086_Imagick_forwardFourierTransformImage_basic.phpt" role="test" />
    <file md5sum="1e22ec8161f1ac4ddd94db167b9d179a" name="tests/087_Imagick_levelImage_basic.phpt" role="test" />
    <file md5sum="11a6ef398bb2b3907443d5bb3ef795ed" name="tests/088_Imagick_implodeImage_basic.phpt" role="test" />
    <file md5sum="6cf73696f373b8b28594efce9550e093" name="tests/089_Imagick_medianFilterImage_basic.phpt" role="test" />
@@ -141,7 +139,7 @@ This extension requires ImageMagick version 6.5.3-10+ and PHP 5.4.0+.</descripti
    <file md5sum="fd975fcf80f318926f4d519fdb17977d" name="tests/095_Imagick_normalizeImage_basic.phpt" role="test" />
    <file md5sum="5a0bde2670a9eb9a0c73b398eba90c30" name="tests/096_Imagick_negateImage_basic.phpt" role="test" />
    <file md5sum="a19cab84fac9ebf600fd0dd3714705d5" name="tests/097_Imagick_newPseudoImage_basic.phpt" role="test" />
-   <file md5sum="e3577f799e111172f0699c2dbb578e8f" name="tests/098_Imagick_orderedPosterizeImage_basic.phpt" role="test" />
+   <file md5sum="50013210dc38613bd9d47f10bc6c195e" name="tests/098_Imagick_orderedPosterizeImage_basic.phpt" role="test" />
    <file md5sum="b5c958898ce29036c97144c466257ded" name="tests/099_Imagick_oilPaintImage_basic.phpt" role="test" />
    <file md5sum="fe2b07f76925aa42eab039ce841d8ee6" name="tests/100_Imagick_posterizeImage_basic.phpt" role="test" />
    <file md5sum="e4150d96ba966d8668876e635f6de1ea" name="tests/101_Imagick_quantizeImage_basic.phpt" role="test" />
@@ -164,7 +162,7 @@ This extension requires ImageMagick version 6.5.3-10+ and PHP 5.4.0+.</descripti
    <file md5sum="ef3b20d6be1d97cd8b486d12f15be580" name="tests/118_Imagick_setImageArtifact_basic.phpt" role="test" />
    <file md5sum="aca8516fd4e9581b89ebae8bd272c959" name="tests/119_Imagick_sepiaToneImage_basic.phpt" role="test" />
    <file md5sum="63c567935c7f0f768f5f19094358ba47" name="tests/120_Imagick_setCompressionQuality_basic.phpt" role="test" />
-   <file md5sum="89a3b4eb515699bff3d5789a4042ae1f" name="tests/121_Imagick_setImageBias_basic.phpt" role="test" />
+   <file md5sum="40810d7b169a53e5d3c4faf2ccd905a8" name="tests/121_Imagick_setImageBias_basic.phpt" role="test" />
    <file md5sum="88a88608b7ee18cb4c2571ded5cdf239" name="tests/122_Imagick_setImageCompressionQuality_basic.phpt" role="test" />
    <file md5sum="6594a2d0cf3245290cf53da1f2ee0150" name="tests/123_Imagick_setImageClipMask_basic.phpt" role="test" />
    <file md5sum="3f3ee7c85d9afe14cf7b7ecb15e41e95" name="tests/125_Imagick_setImageOrientation_basic.phpt" role="test" />
@@ -186,7 +184,7 @@ This extension requires ImageMagick version 6.5.3-10+ and PHP 5.4.0+.</descripti
    <file md5sum="9263c00097d1dbd8abceb182cc72e92e" name="tests/144_Imagick_spliceImage_basic.phpt" role="test" />
    <file md5sum="b5334176264be1382cc86badff178846" name="tests/145_imagickkernel_coverage.phpt" role="test" />
    <file md5sum="4f76d53aa43b408be7dcf58e74129d3f" name="tests/149_Imagick_sparseColorImage.phpt" role="test" />
-   <file md5sum="0cd93a965e2a2b8c12e34f90d594d7fc" name="tests/150_Imagick_setregistry.phpt" role="test" />
+   <file md5sum="1d12ea538994b93dae48f639e1cbbd87" name="tests/150_Imagick_setregistry.phpt" role="test" />
    <file md5sum="85c5edb40dfe7d81457eb82eb623a276" name="tests/151_Imagick_subImageMatch_basic.phpt" role="test" />
    <file md5sum="b7d81ddfda55f5a29d895c964269a6ca" name="tests/152_Imagick_swirlImage_basic.phpt" role="test" />
    <file md5sum="928218be2ed549326128d0eac19c080d" name="tests/153_Imagick_statisticImage_basic.phpt" role="test" />
@@ -195,7 +193,7 @@ This extension requires ImageMagick version 6.5.3-10+ and PHP 5.4.0+.</descripti
    <file md5sum="819f61b213614348ccc472e046cfef9f" name="tests/156_Imagick_tintImage_basic.phpt" role="test" />
    <file md5sum="3abb0e68f83eec1bd2a7e31ad5b1e4c8" name="tests/157_Imagick_thumbnailImage_basic.phpt" role="test" />
    <file md5sum="29deee48c8c6886c38c68d0c20e88738" name="tests/158_Imagick_transposeImage_basic.phpt" role="test" />
-   <file md5sum="0cf9b81620b1247deb6a68885487ecd8" name="tests/159_Imagick_transformImage_basic.phpt" role="test" />
+   <file md5sum="1238bfaf49a20165bdc816c16d49089b" name="tests/159_Imagick_transformImage_basic.phpt" role="test" />
    <file md5sum="725ec4d76a0485fc0a54d2305a2955bb" name="tests/160_Imagick_transparentPaintImage_basic.phpt" role="test" />
    <file md5sum="a2c0e783604fe554c3ca394115d70c70" name="tests/161_Imagick_transformImageColorspace_basic.phpt" role="test" />
    <file md5sum="337ed1fa842a94d887f2c2ba5003fb2d" name="tests/162_Imagick_transverseImage_basic.phpt" role="test" />
@@ -287,44 +285,60 @@ This extension requires ImageMagick version 6.5.3-10+ and PHP 5.4.0+.</descripti
    <file md5sum="ebea7ebf0f95aaf25fa401644f5829a1" name="tests/253_getHdri.phpt" role="test" />
    <file md5sum="4a2e32964661729dfc936d8bf0d8ed38" name="tests/254_getConfigureOptions.phpt" role="test" />
    <file md5sum="95dc4f184d99da28296768261884bac0" name="tests/255_getFeatures.phpt" role="test" />
-   <file md5sum="c435816bb9e857632a4e1650e817924d" name="tests/256_Imagick_exportImagePixels_basic.phpt" role="test" />
+   <file md5sum="29821a7a4db30aeeaac28d7b07e509f0" name="tests/256_Imagick_exportImagePixels_basic.phpt" role="test" />
    <file md5sum="dc3bd860442cb9abe0dd8e798d1df334" name="tests/257_Imagick_setImageChannelMask_basic.phpt" role="test" />
    <file md5sum="d1d1bfc0945e2347268f5b4b607c3235" name="tests/258_Imagick_evaluateImages_basic.phpt" role="test" />
    <file md5sum="76d35ace1a27c6001d909af15b79ada8" name="tests/259_Imagick_colorPoints_basic.phpt" role="test" />
+   <file md5sum="9cf922a27cf0aeecab3d0c51388031dc" name="tests/260_localContrastImage.phpt" role="test" />
+   <file md5sum="dd0c76af37fa3f8d4d422ae25450becc" name="tests/261_compositeImageGravity.phpt" role="test" />
+   <file md5sum="51a669efe49af023d00e77cb094a6b15" name="tests/262_autoOrient.phpt" role="test" />
+   <file md5sum="5080e13a369db4e2042a83827dbcda9d" name="tests/263_autoGammaImage.phpt" role="test" />
+   <file md5sum="f25466a63274ee5579b416792bd61ebe" name="tests/264_ImagickDraw_getTextDirection_basic.phpt" role="test" />
+   <file md5sum="1e61166e6907212a5175b9c647838f1a" name="tests/265_ImagickDraw_getOpacity_basic.phpt" role="test" />
+   <file md5sum="87bb8def101bb112124d9feadda500c3" name="tests/266_ImagickDraw_getFontResolution_basic.phpt" role="test" />
+   <file md5sum="d1ec44bed69eacde2db52cbf89befc21" name="tests/267_ImagickDraw_getBorderColor_basic.phpt" role="test" />
+   <file md5sum="aa379aa71f2c0cb18818727d8d78d0e1" name="tests/268_ImagickDraw_getDensity_basic.phpt" role="test" />
+   <file md5sum="57668e5a648313a84d989a1b644fce70" name="tests/269_ImagickPixel_setColorFromPixel_basic.phpt" role="test" />
+   <file md5sum="25f8907054c183ba6d616301ae374082" name="tests/270_imagick_restoreErrorHandler.phpt" role="test" />
+   <file md5sum="90af42a2b834e318d762b286cfc6ff65" name="tests/271_imagick_constants.phpt" role="test" />
+   <file md5sum="93d7b4b65df7e0f398f8ffb89c3ded29" name="tests/272_imagick_identifyimagetype.phpt" role="test" />
+   <file md5sum="5d2e90aac7782db6c543be3e4231dc8b" name="tests/273_imagick_falsyimage.phpt" role="test" />
    <file md5sum="b9b70ed38470cb2ab0fd8740f77cca8a" name="tests/bug20636.phpt" role="test" />
    <file md5sum="44f0d734dab227610bfeae5d0f9266e3" name="tests/bug21229.phpt" role="test" />
    <file md5sum="c32c56a640c8e0624950b28ec09a2a95" name="tests/bug59378.phpt" role="test" />
    <file md5sum="01295ed8fec504253abead3add0ce2cb" name="tests/bug64015.phpt" role="test" />
    <file md5sum="c0eea15f7fefcb5e8229339b90645d0c" name="tests/bug_66098.phpt" role="test" />
    <file md5sum="1e61212853d014dfaf1e4e9e5b9d84e8" name="tests/bug_71742.phpt" role="test" />
+   <file md5sum="2b237392d0a7e710082b1ebebb6d6e5f" name="tests/bug_72226.phpt" role="test" />
+   <file md5sum="c3b92b06fb138ebed58000ed01f32eef" name="tests/github_174.phpt" role="test" />
    <file md5sum="614fcbba1effb7caa27ef0ef25c27fcf" name="tests/php.gif" role="test" />
-   <file md5sum="42910177b397a57fa61866e7089a960a" name="tests/skipif.inc" role="test" />
+   <file md5sum="ef1aec0c9c36c32029a0676095340fae" name="tests/skipif.inc" role="test" />
    <file md5sum="68c2fc5871e4fc8a2ca058536f201b81" name="tests/skipprobefourier.inc" role="test" />
    <file md5sum="909d5067a0eb9607e346c3a2e121cb04" name="tests/anonymous_pro_minus.ttf" role="test" />
    <file md5sum="e9c57b856b24c9a8c396a12b4cdbdeb9" name="tests/OFL.txt" role="doc" />
-   <file md5sum="e633beb46c1a29304e282e46ca4e4f73" name="config.m4" role="src" />
+   <file md5sum="3285251750ea54d00425373a811ea7a6" name="config.m4" role="src" />
    <file md5sum="29d73c7d4993122ca81e6127e5edb133" name="imagemagick.m4" role="src" />
    <file md5sum="432af3c0083b18708c1516d4db08863b" name="config.w32" role="src" />
    <file md5sum="6077035e65e0b0bbe5a28917282e26b2" name="CREDITS" role="doc" />
-   <file md5sum="c991f97d940ca86970e78c9173de7982" name="imagick.c" role="src" />
-   <file md5sum="cc3d0afd0ac6738721669faf8f0bc699" name="imagick_class.c" role="src" />
+   <file md5sum="f453cced3dd879681b5e9aeffe4dfbb3" name="imagick.c" role="src" />
+   <file md5sum="0395352bf81ed809a172d8d3e89f3531" name="imagick_class.c" role="src" />
    <file md5sum="89ece6cdbd422c5ebd55b026139175be" name="imagickdraw_class.c" role="src" />
    <file md5sum="ef48a059b459253e492d53efd4dea098" name="imagickpixel_class.c" role="src" />
    <file md5sum="1f3706e73d4eed8486212df31759ecdd" name="imagickpixeliterator_class.c" role="src" />
-   <file md5sum="be5657993d27adbec45203be1b8eb635" name="imagickkernel_class.c" role="src" />
-   <file md5sum="2bc55e31ced994afffe09dd7a9f0bbba" name="imagick_helpers.c" role="src" />
+   <file md5sum="e590475ffec0e750e26c7841208c5fac" name="imagickkernel_class.c" role="src" />
+   <file md5sum="62bcbb270c5bbf5d7cf8df79c4f41232" name="imagick_helpers.c" role="src" />
    <file md5sum="d6ede3b576d4b618b293be0e9ecb70a2" name="imagick_file.c" role="src" />
-   <file md5sum="b2863d800c7d27be149ff34af36e69d7" name="php_imagick.h" role="src">
+   <file md5sum="d4db4fb41cc33eb9d1a29ea97929b4ca" name="php_imagick.h" role="src">
     <tasks:replace from="@PACKAGE_VERSION@" to="version" type="package-info" />
    </file>
-   <file md5sum="e3f4a9e1a2d84e311087c8c007d5d341" name="php_imagick_defs.h" role="src" />
+   <file md5sum="f15a1185683ca6e59e375a06ffb2b6b6" name="php_imagick_defs.h" role="src" />
    <file md5sum="043acb065f6104a908223b18a7a289b1" name="php_imagick_helpers.h" role="src" />
-   <file md5sum="1cda4ab0d10299d239db2c0e198b4084" name="php_imagick_macros.h" role="src" />
+   <file md5sum="5e524aa8290c90fa489435292ece39ca" name="php_imagick_macros.h" role="src" />
    <file md5sum="9b4b96d6a870d2962576dd72ec953989" name="php_imagick_shared.h" role="src" />
    <file md5sum="b407a134c7b9a5e3737e26a1f211347d" name="php_imagick_file.h" role="src" />
-   <file md5sum="28792d4b9e3124aaa6c11a941cd5a959" name="shim_im6_to_im7.c" role="src" />
-   <file md5sum="361f3367c0a43e7bf9e27d3ffe292771" name="shim_im6_to_im7.h" role="src" />
-   <file md5sum="6adc5b649551c96819aaba30ddbe6bf6" name="ChangeLog" role="doc" />
+   <file md5sum="334b4ece42d08e58dadd363af97aa3a5" name="shim_im6_to_im7.c" role="src" />
+   <file md5sum="3f02f5a56672f980dff7fc54d5820151" name="shim_im6_to_im7.h" role="src" />
+   <file md5sum="baeeb9006afbdb523cf365aee7e0ebdd" name="ChangeLog" role="doc" />
    <file md5sum="dd34a70236f008af999de817b93a5e3a" name="LICENSE" role="doc" />
   </dir>
  </contents>

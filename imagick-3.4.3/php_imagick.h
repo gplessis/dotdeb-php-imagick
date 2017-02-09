@@ -17,26 +17,35 @@
    |         Scott MacVicar <scottmac@php.net>                            |
    +----------------------------------------------------------------------+
 */
+#ifndef PHP_IMAGICK_H
+/* Prevent double inclusion */
+#define PHP_IMAGICK_H
 
-#ifndef PHP_IMAGICK_MACROS_H
-# define PHP_IMAGICK_MACROS_H
+/* Define Extension Properties */
+#define PHP_IMAGICK_EXTNAME    "imagick"
+// The version is deliberately left as 'PACKAGE_VERSION' in source code.
+// It is only replaced with the actual version number that packaged through pecl.php.net
+#define PHP_IMAGICK_VERSION    "3.4.3"
+#define PHP_IMAGICK_EXTNUM     30403
 
-#define IMAGICK_FREE_MAGICK_MEMORY(value) \
-	do { \
-		if (value) { \
-			MagickRelinquishMemory(value); \
-			value = NULL; \
-		} \
-	} while (0)
-
-#if !defined(E_DEPRECATED)
-#  define E_DEPRECATED E_STRICT
+/* Import configure options when building 
+   outside of the PHP source tree */
+#ifdef HAVE_CONFIG_H
+# include "config.h"
 #endif
 
-#define IMAGICK_METHOD_DEPRECATED(class_name, method_name) \
-	php_error(E_DEPRECATED, "%s::%s method is deprecated and it's use should be avoided", class_name, method_name);
+#ifdef ZTS
+# include "TSRM.h"
+#endif
 
-#define IMAGICK_METHOD_DEPRECATED_USE_INSTEAD(class_name, method_name, new_class, new_method) \
-	php_error(E_DEPRECATED, "%s::%s is deprecated. %s::%s should be used instead", class_name, method_name, new_class, new_method);
+/* Include PHP Standard Headers */
+#include "php.h"
 
-#endif /* PHP_IMAGICK_MACROS_H */
+/* Define the entry point symbol
+ * ZE will use when loading this module
+ */
+extern zend_module_entry imagick_module_entry;
+#define phpext_imagick_ptr &imagick_module_entry
+
+#endif /* PHP_IMAGICK_H */
+
