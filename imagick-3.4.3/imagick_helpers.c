@@ -93,7 +93,9 @@ MagickBooleanType php_imagick_progress_monitor_callable(const char *text, const 
 	fci_cache = empty_fcall_info_cache;
 
 	fci.size = sizeof(fci);
+#if PHP_VERSION_ID < 70100
 	fci.function_table = EG(function_table);
+#endif
 #ifdef ZEND_ENGINE_3
 	fci.object = NULL;
 	//fci.function_name = *callback->user_callback;
@@ -108,7 +110,9 @@ MagickBooleanType php_imagick_progress_monitor_callable(const char *text, const 
 	fci.param_count = 2;
 	fci.params = zargs;
 	fci.no_separation = 0;
+#if PHP_VERSION_ID < 70100
 	fci.symbol_table = NULL;
+#endif
 
 #ifdef ZEND_ENGINE_3
 	ZVAL_LONG(&zargs[0], offset);
@@ -157,6 +161,10 @@ MagickBooleanType php_imagick_progress_monitor_callable(const char *text, const 
 */
 static inline double im_round_helper(double value) {
 	if (value >= 0.0) {
+		// Prevent zero width/height images
+		if (value < 1) {
+			return 1;
+		}
 		return floor(value + 0.5);
 	} else {
 		return ceil(value - 0.5);
@@ -1099,7 +1107,12 @@ void php_imagick_initialize_constants(TSRMLS_D)
 	IMAGICK_REGISTER_CONST_LONG("FILTER_BOX", BoxFilter);
 	IMAGICK_REGISTER_CONST_LONG("FILTER_TRIANGLE", TriangleFilter);
 	IMAGICK_REGISTER_CONST_LONG("FILTER_HERMITE", HermiteFilter);
+#if MagickLibVersion >= 0x701
+	IMAGICK_REGISTER_CONST_LONG("FILTER_HANNING", HannFilter);
+	IMAGICK_REGISTER_CONST_LONG("FILTER_HANN", HannFilter);
+#else
 	IMAGICK_REGISTER_CONST_LONG("FILTER_HANNING", HanningFilter);
+#endif
 	IMAGICK_REGISTER_CONST_LONG("FILTER_HAMMING", HammingFilter);
 	IMAGICK_REGISTER_CONST_LONG("FILTER_BLACKMAN", BlackmanFilter);
 	IMAGICK_REGISTER_CONST_LONG("FILTER_GAUSSIAN", GaussianFilter);
@@ -1112,7 +1125,12 @@ void php_imagick_initialize_constants(TSRMLS_D)
 	IMAGICK_REGISTER_CONST_LONG("FILTER_SINC", SincFilter);
 #if MagickLibVersion >= 0x637
 	IMAGICK_REGISTER_CONST_LONG("FILTER_KAISER", KaiserFilter);
+#if MagickLibVersion >= 0x701
 	IMAGICK_REGISTER_CONST_LONG("FILTER_WELSH", WelshFilter);
+	IMAGICK_REGISTER_CONST_LONG("FILTER_WELCH", WelchFilter);
+#else
+	IMAGICK_REGISTER_CONST_LONG("FILTER_WELSH", WelshFilter);
+#endif
 	IMAGICK_REGISTER_CONST_LONG("FILTER_PARZEN", ParzenFilter);
 	IMAGICK_REGISTER_CONST_LONG("FILTER_LAGRANGE", LagrangeFilter);
 	IMAGICK_REGISTER_CONST_LONG("FILTER_SENTINEL", SentinelFilter);
@@ -1144,22 +1162,43 @@ void php_imagick_initialize_constants(TSRMLS_D)
 	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_GRAYSCALE", GrayscaleType);
 #if MagickLibVersion < 0x700
 	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_GRAYSCALEMATTE", GrayscaleMatteType);
+#else
+	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_GRAYSCALEALPHA", GrayscaleAlphaType);
+	//@TODO - this is only here for legacy support
+	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_GRAYSCALEMATTE", GrayscaleAlphaType);
 #endif
 	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_PALETTE",  PaletteType);
 #if MagickLibVersion < 0x700
 	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_PALETTEMATTE", PaletteMatteType);
+#else
+	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_PALETTEMATTE", PaletteAlphaType);
+	//@TODO - this is only here for legacy support
+	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_PALETTEALPHA", PaletteAlphaType);
 #endif
 	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_TRUECOLOR", TrueColorType);
 #if MagickLibVersion < 0x700
 	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_TRUECOLORMATTE", TrueColorMatteType);
+#else
+	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_TRUECOLORALPHA", TrueColorAlphaType);
+	//@TODO - this is only here for legacy support
+	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_TRUECOLORMATTE", TrueColorAlphaType);
+	
 #endif
 	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_COLORSEPARATION", ColorSeparationType);
 #if MagickLibVersion < 0x700
 	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_COLORSEPARATIONMATTE", ColorSeparationMatteType);
+#else
+	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_COLORSEPARATIONALPHA", ColorSeparationAlphaType);
+	//@TODO - this is only here for legacy support
+	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_COLORSEPARATIONMATTE", ColorSeparationAlphaType);
 #endif
 	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_OPTIMIZE", OptimizeType);
 #if MagickLibVersion < 0x700
 	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_PALETTEBILEVELMATTE", PaletteBilevelMatteType);
+#else
+	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_PALETTEBILEVELALPHA", PaletteBilevelAlphaType);
+	//@TODO - this is only here for legacy support
+	IMAGICK_REGISTER_CONST_LONG("IMGTYPE_PALETTEBILEVELMATTE", PaletteBilevelAlphaType);
 #endif
 	IMAGICK_REGISTER_CONST_LONG("RESOLUTION_UNDEFINED", UndefinedResolution);
 	IMAGICK_REGISTER_CONST_LONG("RESOLUTION_PIXELSPERINCH", PixelsPerInchResolution);
@@ -1286,11 +1325,16 @@ void php_imagick_initialize_constants(TSRMLS_D)
 	IMAGICK_REGISTER_CONST_LONG("METRIC_MEANABSOLUTEERROR", MeanAbsoluteErrorMetric);
 #if MagickLibVersion < 0x700
 	IMAGICK_REGISTER_CONST_LONG("METRIC_MEANERRORPERPIXELMETRIC", MeanErrorPerPixelMetric);
+#else 
+	IMAGICK_REGISTER_CONST_LONG("METRIC_MEANERRORPERPIXELMETRIC", MeanErrorPerPixelErrorMetric);
 #endif
+
 	IMAGICK_REGISTER_CONST_LONG("METRIC_MEANSQUAREERROR", MeanSquaredErrorMetric);
 	IMAGICK_REGISTER_CONST_LONG("METRIC_PEAKABSOLUTEERROR", PeakAbsoluteErrorMetric);
 #if MagickLibVersion < 0x700
 	IMAGICK_REGISTER_CONST_LONG("METRIC_PEAKSIGNALTONOISERATIO", PeakSignalToNoiseRatioMetric);
+#else
+	IMAGICK_REGISTER_CONST_LONG("METRIC_PEAKSIGNALTONOISERATIO", PeakSignalToNoiseRatioErrorMetric);
 #endif
 	IMAGICK_REGISTER_CONST_LONG("METRIC_ROOTMEANSQUAREDERROR", RootMeanSquaredErrorMetric);
 #if MagickLibVersion >= 0x687
@@ -1552,6 +1596,10 @@ void php_imagick_initialize_constants(TSRMLS_D)
 #endif
 #endif
 
+#if MagickLibVersion >= 0x701
+	IMAGICK_REGISTER_CONST_LONG("INTERPOLATE_NEAREST_PIXEL", NearestInterpolatePixel); /* NearestInterpolatePixel */
+#endif
+
 #if MagickLibVersion > 0x628
 	IMAGICK_REGISTER_CONST_LONG("LAYERMETHOD_UNDEFINED", UndefinedLayer);
 	IMAGICK_REGISTER_CONST_LONG("LAYERMETHOD_COALESCE", CoalesceLayer);
@@ -1626,23 +1674,40 @@ void php_imagick_initialize_constants(TSRMLS_D)
 #endif
 #if MagickLibVersion > 0x637
 	IMAGICK_REGISTER_CONST_LONG("ALPHACHANNEL_ACTIVATE", ActivateAlphaChannel);
-#if MagickLibVersion < 0x700
+#if MagickLibVersion >= 0x700
+	IMAGICK_REGISTER_CONST_LONG("ALPHACHANNEL_ON", OnAlphaChannel);
+#else
 	IMAGICK_REGISTER_CONST_LONG("ALPHACHANNEL_RESET", ResetAlphaChannel);
 #endif
 	IMAGICK_REGISTER_CONST_LONG("ALPHACHANNEL_SET", SetAlphaChannel);
 #endif
 #if MagickLibVersion > 0x645
 	IMAGICK_REGISTER_CONST_LONG("ALPHACHANNEL_UNDEFINED", UndefinedAlphaChannel);
+#if MagickLibVersion >= 0x700
+	IMAGICK_REGISTER_CONST_LONG("ALPHACHANNEL_DISCRETE", DiscreteAlphaChannel);
+#else
 	IMAGICK_REGISTER_CONST_LONG("ALPHACHANNEL_COPY", CopyAlphaChannel);
+#endif
 	IMAGICK_REGISTER_CONST_LONG("ALPHACHANNEL_DEACTIVATE", DeactivateAlphaChannel);
 	IMAGICK_REGISTER_CONST_LONG("ALPHACHANNEL_EXTRACT", ExtractAlphaChannel);
+#if MagickLibVersion >= 0x700
+	IMAGICK_REGISTER_CONST_LONG("ALPHACHANNEL_OFF", OffAlphaChannel);
+#else
 	IMAGICK_REGISTER_CONST_LONG("ALPHACHANNEL_OPAQUE", OpaqueAlphaChannel);
+#endif
 	IMAGICK_REGISTER_CONST_LONG("ALPHACHANNEL_SHAPE", ShapeAlphaChannel);
 	IMAGICK_REGISTER_CONST_LONG("ALPHACHANNEL_TRANSPARENT", TransparentAlphaChannel);
 #if MagickLibVersion >= 0x690
 	IMAGICK_REGISTER_CONST_LONG("ALPHACHANNEL_ASSOCIATE", AssociateAlphaChannel);
 	IMAGICK_REGISTER_CONST_LONG("ALPHACHANNEL_DISSOCIATE", DisassociateAlphaChannel);
 #endif
+	/*
+	 DiscreteAlphaChannel,                  CopyAlphaChannel,
+	 DisassociateAlphaChannel,              DeactivateAlphaChannel,
+	 ExtractAlphaChannel,                   ExtractAlphaChannel,
+	 OffAlphaChannel,                       OpaqueAlphaChannel,
+	 OnAlphaChannel,                        ResetAlphaChannel,  // deprecated
+	*/
 
 	IMAGICK_REGISTER_CONST_LONG("SPARSECOLORMETHOD_UNDEFINED", UndefinedColorInterpolate);
 	IMAGICK_REGISTER_CONST_LONG("SPARSECOLORMETHOD_BARYCENTRIC", BarycentricColorInterpolate);

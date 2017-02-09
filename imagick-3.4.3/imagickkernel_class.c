@@ -198,6 +198,19 @@ static void createKernelZval(zval *pzval, KernelInfo *kernel_info TSRMLS_DC) {
 	intern_return->kernel_info = kernel_info;
 }
 
+
+/* {{{ proto ImagickKernel ImagickKernel::__construct()
+   The ImagickKernel constructor
+*/
+PHP_METHOD(imagickkernel, __construct)
+{
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
+	}
+	// this method is private.
+}
+/* }}} */
+
 #define MATRIX_ERROR_EMPTY "Cannot create kernel, matrix is empty."
 #define MATRIX_ERROR_UNEVEN "Values must be matrix, with the same number of columns in each row."
 #define MATRIX_ERROR_BAD_VALUE "Only numbers or false are valid values in a kernel matrix."
@@ -577,6 +590,9 @@ PHP_METHOD(imagickkernel, frombuiltin)
 	char *string;
 	IM_LEN_TYPE string_len;
 	GeometryFlags flags;
+#if MagickLibVersion >= 0x700
+	ExceptionInfo *exception_info = NULL;
+#endif
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ls", &kernel_type, &string, &string_len) == FAILURE) {
 		return;
@@ -586,8 +602,6 @@ PHP_METHOD(imagickkernel, frombuiltin)
 	imagick_fiddle_with_geometry_info(kernel_type, flags, &geometry_info);
 	
 #if MagickLibVersion >= 0x700
-
-	ExceptionInfo *exception_info = NULL;
 	//TODO - inspect exception info
 	kernel_info = AcquireKernelBuiltIn(kernel_type, &geometry_info, exception_info);
 #else
@@ -607,7 +621,6 @@ PHP_METHOD(imagickkernel, frombuiltin)
 PHP_METHOD(imagickkernel, addkernel)
 {
 	zval *objvar;
-//	KernelInfo *kernel_info_this_clone;
 	KernelInfo *kernel_info_add_clone;
 
 	KernelInfo *kernel_info;
@@ -622,15 +635,17 @@ PHP_METHOD(imagickkernel, addkernel)
 
 	kernel = Z_IMAGICKKERNEL_P(objvar);
 	internp = Z_IMAGICKKERNEL_P(getThis());
+
+	if (kernel->kernel_info == NULL) {
+		zend_throw_exception(php_imagickkernel_exception_class_entry, "ImagickKernel is empty, cannot be used", (long)0 TSRMLS_CC);
+		RETURN_NULL();
+	}
+
 	kernel_info = internp->kernel_info;
-
-	//createKernelZval(return_value, kernel_info_this_clone TSRMLS_CC);
-
 	while (kernel_info != NULL) {
 		kernel_info_target = kernel_info;
 		kernel_info = kernel_info->next;
 	};
-
 	kernel_info_add_clone = CloneKernelInfo(kernel->kernel_info);
 	kernel_info_target->next = kernel_info_add_clone;
 
@@ -661,6 +676,7 @@ PHP_METHOD(imagickkernel, separate)
 	}
 
 	internp = Z_IMAGICKKERNEL_P(getThis());
+	IMAGICK_KERNEL_NOT_NULL_EMPTY(internp);
 	kernel_info = internp->kernel_info;
 
 	array_init(return_value);
@@ -707,6 +723,7 @@ PHP_METHOD(imagickkernel, getmatrix)
 	}
 
 	internp = Z_IMAGICKKERNEL_P(getThis());
+	IMAGICK_KERNEL_NOT_NULL_EMPTY(internp);
 
 	array_init(return_value);
 	php_imagickkernelvalues_to_zval(return_value, internp->kernel_info);
@@ -740,6 +757,7 @@ PHP_METHOD(imagickkernel, scale)
 	}
 
 	internp = Z_IMAGICKKERNEL_P(getThis());
+	IMAGICK_KERNEL_NOT_NULL_EMPTY(internp);
 	ScaleKernelInfo(internp->kernel_info, scale, normalize_flag);
 
 	return;
@@ -765,6 +783,7 @@ PHP_METHOD(imagickkernel, addunitykernel)
 	}
 
 	internp = Z_IMAGICKKERNEL_P(getThis());
+	IMAGICK_KERNEL_NOT_NULL_EMPTY(internp);
 	UnityAddKernelInfo(internp->kernel_info, scale);
 
 	return;

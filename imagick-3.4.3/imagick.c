@@ -257,6 +257,13 @@ PHP_IMAGICK_API zend_class_entry *php_imagickpixel_get_class_entry()
 	ZEND_END_ARG_INFO()
 #endif
 
+#if MagickLibVersion > 0x700
+	ZEND_BEGIN_ARG_INFO_EX(imagick_setimagealpha_args, 0, 0, 1)
+		ZEND_ARG_INFO(0, alpha)
+	ZEND_END_ARG_INFO()
+#endif
+
+
 #if MagickLibVersion > 0x635
 	ZEND_BEGIN_ARG_INFO_EX(imagick_clutimage_args, 0, 0, 1)
 		ZEND_ARG_OBJ_INFO(0, Imagick, Imagick, 0)
@@ -2248,7 +2255,9 @@ static zend_function_entry php_imagick_class_methods[] =
 	PHP_ME(imagick, vignetteimage, imagick_vignetteimage_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, uniqueimagecolors, imagick_zero_args, ZEND_ACC_PUBLIC)
 #if !defined(MAGICKCORE_EXCLUDE_DEPRECATED)
+#if MagickLibVersion < 0x700
 	PHP_ME(imagick, getimagematte, imagick_zero_args, ZEND_ACC_PUBLIC)
+#endif // #if MagickLibVersion < 0x700
 #endif
 	PHP_ME(imagick, setimagematte, imagick_setimagematte_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, adaptiveresizeimage, imagick_adaptiveresizeimage_args, ZEND_ACC_PUBLIC)
@@ -2267,21 +2276,30 @@ static zend_function_entry php_imagick_class_methods[] =
 #endif
 	PHP_ME(imagick, setiteratorindex, imagick_setiteratorindex_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, getiteratorindex, imagick_zero_args, ZEND_ACC_PUBLIC)
+#if MagickLibVersion < 0x700
 	PHP_ME(imagick, transformimage, imagick_transformimage_args, ZEND_ACC_PUBLIC)
+#endif // #if MagickLibVersion < 0x700
 #endif
 #if MagickLibVersion > 0x630
 #if MagickLibVersion < 0x700
 	PHP_ME(imagick, setimageopacity, imagick_setimageopacity_args, ZEND_ACC_PUBLIC)
 #endif
-	PHP_ME(imagick, orderedposterizeimage, imagick_orderedposterizeimage_args, ZEND_ACC_PUBLIC)
+#if MagickLibVersion >= 0x700
+	PHP_ME(imagick, setimagealpha, imagick_setimagealpha_args, ZEND_ACC_PUBLIC)
 #endif
+#if MagickLibVersion < 0x700
+	PHP_ME(imagick, orderedposterizeimage, imagick_orderedposterizeimage_args, ZEND_ACC_PUBLIC)
+#endif //#if MagickLibVersion < 0x700
+#endif //#if MagickLibVersion > 0x630
 #if MagickLibVersion > 0x631
 	PHP_ME(imagick, polaroidimage, imagick_polaroidimage_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, getimageproperty, imagick_getimageproperty_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, setimageproperty, imagick_setimageproperty_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, deleteimageproperty, imagick_deleteimageproperty_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, identifyformat, imagick_identifyformat_args, ZEND_ACC_PUBLIC)
+#ifdef HAVE_MAGICKSETIMAGEINTERPOLATEMETHOD
 	PHP_ME(imagick, setimageinterpolatemethod, imagick_setimageinterpolatemethod_args, ZEND_ACC_PUBLIC)
+#endif // #ifdef HAVE_MAGICKSETIMAGEINTERPOLATEMETHOD
 	PHP_ME(imagick, getimageinterpolatemethod, imagick_zero_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, linearstretchimage, imagick_linearstretchimage_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, getimagelength, imagick_zero_args, ZEND_ACC_PUBLIC)
@@ -2293,7 +2311,9 @@ static zend_function_entry php_imagick_class_methods[] =
 #endif
 #if !defined(MAGICKCORE_EXCLUDE_DEPRECATED)
 #if MagickLibVersion > 0x634
+#if MagickLibVersion < 0x700
 	PHP_ME(imagick, paintfloodfillimage, imagick_paintfloodfillimage_args, ZEND_ACC_PUBLIC)
+#endif // #if MagickLibVersion < 0x700
 #endif
 #endif
 #if MagickLibVersion > 0x635
@@ -2409,7 +2429,9 @@ static zend_function_entry php_imagick_class_methods[] =
 	PHP_ME(imagick, clear, imagick_zero_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, clone, imagick_zero_args, ZEND_ACC_PUBLIC)
 #if !defined(MAGICKCORE_EXCLUDE_DEPRECATED)
+#if MagickLibVersion < 0x700
 	PHP_ME(imagick, getimagesize, imagick_zero_args, ZEND_ACC_PUBLIC)
+#endif // #if MagickLibVersion < 0x700
 #endif
 	PHP_ME(imagick, getimageblob, imagick_zero_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, getimagesblob, imagick_zero_args, ZEND_ACC_PUBLIC)
@@ -2421,8 +2443,10 @@ static zend_function_entry php_imagick_class_methods[] =
 	PHP_ME(imagick, haspreviousimage, imagick_zero_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, hasnextimage, imagick_zero_args, ZEND_ACC_PUBLIC)
 #if !defined(MAGICKCORE_EXCLUDE_DEPRECATED)
+#if MagickLibVersion < 0x700
 	PHP_ME(imagick, setimageindex, imagick_setimageindex_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, getimageindex, imagick_zero_args, ZEND_ACC_PUBLIC)
+#endif // #if MagickLibVersion < 0x700
 #endif
 	PHP_ME(imagick, commentimage, imagick_commentimage_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, cropimage, imagick_cropimage_args, ZEND_ACC_PUBLIC)
@@ -2462,7 +2486,9 @@ static zend_function_entry php_imagick_class_methods[] =
 	PHP_ME(imagick, solarizeimage, imagick_solarizeimage_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, shadowimage, imagick_shadowimage_args, ZEND_ACC_PUBLIC)
 #if !defined(MAGICKCORE_EXCLUDE_DEPRECATED)
+#if MagickLibVersion < 0x700
 	PHP_ME(imagick, setimageattribute, imagick_setimageattribute_args, ZEND_ACC_PUBLIC)
+#endif // #if MagickLibVersion < 0x700
 #endif
 	PHP_ME(imagick, setimagebackgroundcolor, imagick_setimagebackgroundcolor_args, ZEND_ACC_PUBLIC)
 #if MagickLibVersion >= 0x700
@@ -2473,7 +2499,9 @@ static zend_function_entry php_imagick_class_methods[] =
 	PHP_ME(imagick, setimagedepth, imagick_setimagedepth_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, setimagegamma, imagick_setimagegamma_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, setimageiterations, imagick_setimageiterations_args, ZEND_ACC_PUBLIC)
+#if MagickLibVersion < 0x700
 	PHP_ME(imagick, setimagemattecolor, imagick_setimagemattecolor_args, ZEND_ACC_PUBLIC)
+#endif // #if MagickLibVersion < 0x700
 	PHP_ME(imagick, setimagepage, imagick_setimagepage_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, setimageprogressmonitor, imagick_setimageprogressmonitor_args, ZEND_ACC_PUBLIC)
 #if MagickLibVersion > 0x653
@@ -2523,7 +2551,9 @@ static zend_function_entry php_imagick_class_methods[] =
 	PHP_MALIAS(imagick, clipimagepath, clippathimage, imagick_clippathimage_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, coalesceimages, imagick_zero_args, ZEND_ACC_PUBLIC)
 #if !defined(MAGICKCORE_EXCLUDE_DEPRECATED)
+#if MagickLibVersion < 0x700
 	PHP_ME(imagick, colorfloodfillimage, imagick_colorfloodfillimage_args, ZEND_ACC_PUBLIC)
+#endif // #if MagickLibVersion < 0x700
 #endif
 	PHP_ME(imagick, colorizeimage, imagick_colorizeimage_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, compareimagechannels, imagick_compareimagechannels_args, ZEND_ACC_PUBLIC)
@@ -2567,7 +2597,9 @@ static zend_function_entry php_imagick_class_methods[] =
 	PHP_ME(imagick, getimagechanneldepth, imagick_getimagechanneldepth_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, getimagechanneldistortion, imagick_getimagechanneldistortion_args, ZEND_ACC_PUBLIC)
 #if !defined(MAGICKCORE_EXCLUDE_DEPRECATED)
+#if MagickLibVersion < 0x700
 	PHP_ME(imagick, getimagechannelextrema, imagick_getimagechannelextrema_args, ZEND_ACC_PUBLIC)
+#endif // #if MagickLibVersion < 0x700
 #endif
 	PHP_ME(imagick, getimagechannelmean, imagick_getimagechannelmean_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, getimagechannelstatistics, imagick_zero_args, ZEND_ACC_PUBLIC)
@@ -2578,7 +2610,9 @@ static zend_function_entry php_imagick_class_methods[] =
 	PHP_ME(imagick, getimagedepth, imagick_zero_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, getimagedistortion, imagick_getimagedistortion_args, ZEND_ACC_PUBLIC)
 #if !defined(MAGICKCORE_EXCLUDE_DEPRECATED)
+#if MagickLibVersion < 0x700
 	PHP_ME(imagick, getimageextrema, imagick_zero_args, ZEND_ACC_PUBLIC)
+#endif // #if MagickLibVersion < 0x700
 #endif
 	PHP_ME(imagick, getimagedispose, imagick_zero_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, getimagegamma, imagick_zero_args, ZEND_ACC_PUBLIC)
@@ -2587,7 +2621,9 @@ static zend_function_entry php_imagick_class_methods[] =
 	PHP_ME(imagick, getimagehistogram, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, getimageinterlacescheme, imagick_zero_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, getimageiterations, imagick_zero_args, ZEND_ACC_PUBLIC)
+#if MagickLibVersion < 0x700
 	PHP_ME(imagick, getimagemattecolor, imagick_zero_args, ZEND_ACC_PUBLIC)
+#endif //#if MagickLibVersion < 0x700
 	PHP_ME(imagick, getimagepage, imagick_zero_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, getimagepixelcolor, imagick_getimagepixelcolor_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, getimageprofile, imagick_getimageprofile_args, ZEND_ACC_PUBLIC)
@@ -2612,8 +2648,10 @@ static zend_function_entry php_imagick_class_methods[] =
 	PHP_ME(imagick, levelimage, imagick_levelimage_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, magnifyimage, imagick_zero_args, ZEND_ACC_PUBLIC)
 #if !defined(MAGICKCORE_EXCLUDE_DEPRECATED)
+#if MagickLibVersion < 0x700
 	PHP_ME(imagick, mapimage, imagick_mapimage_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, mattefloodfillimage, imagick_mattefloodfillimage_args, ZEND_ACC_PUBLIC)
+#endif // #if MagickLibVersion < 0x700
 #endif
 #if MagickLibVersion < 0x700
 #if !defined(MAGICKCORE_EXCLUDE_DEPRECATED)
@@ -2622,8 +2660,10 @@ static zend_function_entry php_imagick_class_methods[] =
 #endif
 	PHP_ME(imagick, negateimage, imagick_negateimage_args, ZEND_ACC_PUBLIC)
 #if !defined(MAGICKCORE_EXCLUDE_DEPRECATED)
+#if MagickLibVersion < 0x700
 	PHP_ME(imagick, paintopaqueimage, imagick_paintopaqueimage_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, painttransparentimage, imagick_painttransparentimage_args, ZEND_ACC_PUBLIC)
+#endif //#if MagickLibVersion < 0x700
 #endif
 	PHP_ME(imagick, previewimages, imagick_previewimages_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, profileimage, imagick_profileimage_args, ZEND_ACC_PUBLIC)
@@ -2737,7 +2777,9 @@ static zend_function_entry php_imagick_class_methods[] =
 	PHP_ME(imagick, listregistry, imagick_zero_args, ZEND_ACC_STATIC|ZEND_ACC_PUBLIC)
 #if MagickLibVersion >= 0x680
 	PHP_ME(imagick, morphology, imagick_morphology_args, ZEND_ACC_PUBLIC)
+#if MagickLibVersion < 0x700
 	PHP_ME(imagick, filter, imagick_filter_args, ZEND_ACC_PUBLIC)
+#endif // #if MagickLibVersion < 0x700
 #endif
 	PHP_ME(imagick, setantialias, imagick_setantialias_args, ZEND_ACC_PUBLIC)
 	PHP_ME(imagick, getantialias, imagick_zero_args, ZEND_ACC_PUBLIC)
@@ -2755,6 +2797,9 @@ static zend_function_entry php_imagick_class_methods[] =
 #if MagickLibVersion >= 0x693
 	PHP_ME(imagick, localcontrastimage, imagick_localContrastImage_args, ZEND_ACC_PUBLIC)
 #endif // #if MagickLibVersion >= 0x692
+#if MagickLibVersion >= 0x700
+	PHP_ME(imagick, identifyimagetype, imagick_zero_args, ZEND_ACC_PUBLIC)
+#endif // #if MagickLibVersion >= 0x700
 
 	{ NULL, NULL, NULL }
 };
@@ -2762,6 +2807,7 @@ static zend_function_entry php_imagick_class_methods[] =
 #ifdef IMAGICK_WITH_KERNEL
 static zend_function_entry php_imagickkernel_class_methods[] =
 {
+	PHP_ME(imagickkernel, __construct, imagick_zero_args, ZEND_ACC_PRIVATE|ZEND_ACC_CTOR)
 	PHP_ME(imagickkernel, frommatrix, imagickkernel_frommatrix_args, ZEND_ACC_STATIC|ZEND_ACC_PUBLIC)
 	PHP_ME(imagickkernel, frombuiltin, imagickkernel_frombuiltin_args, ZEND_ACC_STATIC|ZEND_ACC_PUBLIC)
 	PHP_ME(imagickkernel, addkernel, imagickkernel_addkernel_args, ZEND_ACC_PUBLIC)
@@ -2899,7 +2945,7 @@ static zend_object_value php_imagick_object_new_ex(zend_class_entry *class_type,
 #ifdef ZEND_ENGINE_3
 	intern = ecalloc(1,
 		sizeof(php_imagick_object) +
-		sizeof(zval) * (class_type->default_properties_count - 1));
+		zend_object_properties_size(class_type));
 #else
 	zend_object_value retval;
 
@@ -2967,7 +3013,7 @@ static zend_object_value php_imagickdraw_object_new_ex(zend_class_entry *class_t
 	/* Allocate memory for it */
 	intern = ecalloc(1,
 		sizeof(php_imagickdraw_object) +
-		sizeof(zval) * (class_type->default_properties_count - 1));
+		zend_object_properties_size(class_type));
 
 	zend_object_std_init(&intern->zo, class_type TSRMLS_CC);
 	object_properties_init(&intern->zo, class_type);
@@ -3028,7 +3074,7 @@ static zend_object_value php_imagickpixeliterator_object_new(zend_class_entry *c
 #ifdef ZEND_ENGINE_3
 	intern = ecalloc(1,
 			sizeof(php_imagickpixeliterator_object) +
-			sizeof(zval) * (class_type->default_properties_count - 1));
+			zend_object_properties_size(class_type));
 #else
 	zend_object_value retval;
 	intern = (php_imagickpixeliterator_object *) emalloc(sizeof(php_imagickpixeliterator_object));
@@ -3071,7 +3117,7 @@ static zend_object_value php_imagickpixel_object_new_ex(zend_class_entry *class_
 	/* Allocate memory for it */
 	intern = ecalloc(1,
 		sizeof(php_imagickpixel_object) +
-		sizeof(zval) * (class_type->default_properties_count - 1));
+		zend_object_properties_size(class_type));
 #else
 	zend_object_value retval;
 	intern = (php_imagickpixel_object *) emalloc(sizeof(php_imagickpixel_object));
@@ -3125,7 +3171,7 @@ static zend_object_value php_imagickkernel_object_new_ex(zend_class_entry *class
 #ifdef ZEND_ENGINE_3
 	intern = ecalloc(1,
 		sizeof(php_imagickkernel_object) +
-		sizeof(zval) * (class_type->default_properties_count - 1));
+		zend_object_properties_size(class_type));
 #else
 	zend_object_value retval;
 	intern = (php_imagickkernel_object *) emalloc(sizeof(php_imagickkernel_object));
@@ -3458,14 +3504,17 @@ static zend_object_value php_imagick_clone_imagickkernel_object(zval *this_ptr T
 	zend_objects_clone_members(&new_obj->zo, new_zo, &old_obj->zo, Z_OBJ_HANDLE_P(this_ptr) TSRMLS_CC);
 #endif
 
-	kernel_info_copy = CloneKernelInfo(old_obj->kernel_info);
+	if (old_obj->kernel_info != NULL) {
+		kernel_info_copy = CloneKernelInfo(old_obj->kernel_info);
 
-	if (!kernel_info_copy) {
-		zend_error(E_ERROR, "Failed to clone ImagickKernel object");
-	} else {
-		new_obj->kernel_info = kernel_info_copy;
-
+		if (!kernel_info_copy) {
+			zend_error(E_ERROR, "Failed to clone ImagickKernel object");
+		}
+		else {
+			new_obj->kernel_info = kernel_info_copy;
+		}
 	}
+
 	return new_zo;
 }
 #endif
@@ -3519,45 +3568,40 @@ PHP_MINIT_FUNCTION(imagick)
 	*/
 	INIT_CLASS_ENTRY(ce, PHP_IMAGICK_EXCEPTION_SC_NAME, NULL);
 #ifdef ZEND_ENGINE_3
-	php_imagick_exception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(TSRMLS_C) TSRMLS_CC);
+	php_imagick_exception_class_entry = zend_register_internal_class_ex(&ce, zend_ce_exception);
 #else
 	php_imagick_exception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(TSRMLS_C), NULL TSRMLS_CC);
 #endif
-
-	php_imagick_exception_class_entry->ce_flags |= ZEND_ACC_FINAL;
 
 	/*
 	Initialize exceptions (ImagickDraw exception)
 	*/
 	INIT_CLASS_ENTRY(ce, PHP_IMAGICKDRAW_EXCEPTION_SC_NAME, NULL);
 #ifdef ZEND_ENGINE_3
-	php_imagickdraw_exception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(TSRMLS_C) TSRMLS_CC);
+	php_imagickdraw_exception_class_entry = zend_register_internal_class_ex(&ce, zend_ce_exception);
 #else
 	php_imagickdraw_exception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(TSRMLS_C), NULL TSRMLS_CC);
 #endif
-	php_imagickdraw_exception_class_entry->ce_flags |= ZEND_ACC_FINAL;
 
 	/*
 	Initialize exceptions (ImagickPixelIterator exception)
 	*/
 	INIT_CLASS_ENTRY(ce, PHP_IMAGICKPIXELITERATOR_EXCEPTION_SC_NAME, NULL);
 #ifdef ZEND_ENGINE_3
-	php_imagickpixeliterator_exception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(TSRMLS_C) TSRMLS_CC);
+	php_imagickpixeliterator_exception_class_entry = zend_register_internal_class_ex(&ce, zend_ce_exception);
 #else
 	php_imagickpixeliterator_exception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(TSRMLS_C), NULL TSRMLS_CC);
 #endif
-	php_imagickpixeliterator_exception_class_entry->ce_flags |= ZEND_ACC_FINAL;
 
 	/*
 	Initialize exceptions (ImagickPixel exception)
 	*/
 	INIT_CLASS_ENTRY(ce, PHP_IMAGICKPIXEL_EXCEPTION_SC_NAME, NULL);
 #ifdef ZEND_ENGINE_3
-	php_imagickpixel_exception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(TSRMLS_C) TSRMLS_CC);
+	php_imagickpixel_exception_class_entry = zend_register_internal_class_ex(&ce, zend_ce_exception);
 #else
 	php_imagickpixel_exception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(TSRMLS_C), NULL TSRMLS_CC);
 #endif
-	php_imagickpixel_exception_class_entry->ce_flags |= ZEND_ACC_FINAL;
 
 #ifdef IMAGICK_WITH_KERNEL
 	/*
@@ -3565,12 +3609,11 @@ PHP_MINIT_FUNCTION(imagick)
 	*/
 	INIT_CLASS_ENTRY(ce, PHP_IMAGICKKERNEL_EXCEPTION_SC_NAME, NULL);
 	#ifdef ZEND_ENGINE_3
-	php_imagickkernel_exception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(TSRMLS_C) TSRMLS_CC);
+	php_imagickkernel_exception_class_entry = zend_register_internal_class_ex(&ce, zend_ce_exception);
     #else
 	php_imagickkernel_exception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(TSRMLS_C), NULL TSRMLS_CC);
     #endif
 
-	php_imagickkernel_exception_class_entry->ce_flags |= ZEND_ACC_FINAL;
 #endif
 
 	/*
